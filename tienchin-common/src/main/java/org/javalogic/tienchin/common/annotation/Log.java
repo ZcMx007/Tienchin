@@ -5,20 +5,19 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
 import org.javalogic.tienchin.common.enums.BusinessType;
 import org.javalogic.tienchin.common.enums.OperatorType;
 
 /**
  * 自定义操作日志记录注解
- * 
- * @author tienchin
  *
+ * @author tienchin
  */
-@Target({ ElementType.PARAMETER, ElementType.METHOD })
+@Target({ElementType.PARAMETER, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Log
-{
+public @interface Log {
     /**
      * 模块
      */

@@ -6,8 +6,7 @@ package org.javalogic.tienchin.common.enums;
  * @author tienchin
  */
 
-public enum LimitType
-{
+public enum LimitType {
     /**
      * 默认策略全局限流
      */

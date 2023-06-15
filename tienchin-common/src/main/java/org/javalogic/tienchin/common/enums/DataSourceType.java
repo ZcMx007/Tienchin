@@ -2,11 +2,10 @@ package org.javalogic.tienchin.common.enums;
 
 /**
  * 数据源
- * 
+ *
  * @author tienchin
  */
-public enum DataSourceType
-{
+public enum DataSourceType {
     /**
      * 主库
      */

@@ -2,12 +2,10 @@ package org.javalogic.tienchin.common.enums;
 
 /**
  * 操作状态
- * 
- * @author tienchin
  *
+ * @author tienchin
  */
-public enum BusinessStatus
-{
+public enum BusinessStatus {
     /**
      * 成功
      */

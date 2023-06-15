@@ -2,11 +2,10 @@ package org.javalogic.tienchin.common.constant;
 
 /**
  * 返回状态码
- * 
+ *
  * @author tienchin
  */
-public class HttpStatus
-{
+public class HttpStatus {
     /**
      * 操作成功
      */

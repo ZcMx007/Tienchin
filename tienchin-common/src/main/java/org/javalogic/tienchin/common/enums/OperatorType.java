@@ -2,11 +2,10 @@ package org.javalogic.tienchin.common.enums;
 
 /**
  * 操作人类别
- * 
+ *
  * @author tienchin
  */
-public enum OperatorType
-{
+public enum OperatorType {
     /**
      * 其它
      */

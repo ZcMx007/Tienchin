@@ -2,6 +2,7 @@ package org.javalogic.tienchin.web.controller.system;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -24,13 +25,12 @@ import org.javalogic.tienchin.system.service.ISysPostService;
 
 /**
  * 岗位信息操作处理
- * 
+ *
  * @author tienchin
  */
 @RestController
 @RequestMapping("/system/post")
-public class SysPostController extends BaseController
-{
+public class SysPostController extends BaseController {
     @Autowired
     private ISysPostService postService;
 
@@ -39,18 +39,16 @@ public class SysPostController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:post:list')")
     @GetMapping("/list")
-    public TableDataInfo list(SysPost post)
-    {
+    public TableDataInfo list(SysPost post) {
         startPage();
         List<SysPost> list = postService.selectPostList(post);
         return getDataTable(list);
     }
-    
-    @Log(title = "岗位管理", businessType = BusinessType.EXPORT)
+
+    @Log(title = "岗位管理" , businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('system:post:export')")
     @PostMapping("/export")
-    public void export(HttpServletResponse response, SysPost post)
-    {
+    public void export(HttpServletResponse response, SysPost post) {
         List<SysPost> list = postService.selectPostList(post);
         ExcelUtil<SysPost> util = new ExcelUtil<SysPost>(SysPost.class);
         util.exportExcel(response, list, "岗位数据");
@@ -61,8 +59,7 @@ public class SysPostController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:post:query')")
     @GetMapping(value = "/{postId}")
-    public AjaxResult getInfo(@PathVariable Long postId)
-    {
+    public AjaxResult getInfo(@PathVariable Long postId) {
         return success(postService.selectPostById(postId));
     }
 
@@ -70,16 +67,12 @@ public class SysPostController extends BaseController
      * 新增岗位
      */
     @PreAuthorize("@ss.hasPermi('system:post:add')")
-    @Log(title = "岗位管理", businessType = BusinessType.INSERT)
+    @Log(title = "岗位管理" , businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@Validated @RequestBody SysPost post)
-    {
-        if (!postService.checkPostNameUnique(post))
-        {
+    public AjaxResult add(@Validated @RequestBody SysPost post) {
+        if (!postService.checkPostNameUnique(post)) {
             return error("新增岗位'" + post.getPostName() + "'失败，岗位名称已存在");
-        }
-        else if (!postService.checkPostCodeUnique(post))
-        {
+        } else if (!postService.checkPostCodeUnique(post)) {
             return error("新增岗位'" + post.getPostName() + "'失败，岗位编码已存在");
         }
         post.setCreateBy(getUsername());
@@ -90,16 +83,12 @@ public class SysPostController extends BaseController
      * 修改岗位
      */
     @PreAuthorize("@ss.hasPermi('system:post:edit')")
-    @Log(title = "岗位管理", businessType = BusinessType.UPDATE)
+    @Log(title = "岗位管理" , businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@Validated @RequestBody SysPost post)
-    {
-        if (!postService.checkPostNameUnique(post))
-        {
+    public AjaxResult edit(@Validated @RequestBody SysPost post) {
+        if (!postService.checkPostNameUnique(post)) {
             return error("修改岗位'" + post.getPostName() + "'失败，岗位名称已存在");
-        }
-        else if (!postService.checkPostCodeUnique(post))
-        {
+        } else if (!postService.checkPostCodeUnique(post)) {
             return error("修改岗位'" + post.getPostName() + "'失败，岗位编码已存在");
         }
         post.setUpdateBy(getUsername());
@@ -110,10 +99,9 @@ public class SysPostController extends BaseController
      * 删除岗位
      */
     @PreAuthorize("@ss.hasPermi('system:post:remove')")
-    @Log(title = "岗位管理", businessType = BusinessType.DELETE)
+    @Log(title = "岗位管理" , businessType = BusinessType.DELETE)
     @DeleteMapping("/{postIds}")
-    public AjaxResult remove(@PathVariable Long[] postIds)
-    {
+    public AjaxResult remove(@PathVariable Long[] postIds) {
         return toAjax(postService.deletePostByIds(postIds));
     }
 
@@ -121,8 +109,7 @@ public class SysPostController extends BaseController
      * 获取岗位选择框列表
      */
     @GetMapping("/optionselect")
-    public AjaxResult optionselect()
-    {
+    public AjaxResult optionselect() {
         List<SysPost> posts = postService.selectPostAll();
         return success(posts);
     }
